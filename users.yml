@@ -1,0 +1,7 @@
+group: name=apps state=present
+    
+user: name=app1 groups=apps 
+
+user: name=app2 groups=apps
+
+
