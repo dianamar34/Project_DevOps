@@ -1,5 +1,8 @@
 pipeline {
-    
+    agent {
+            args 'mvn -v'
+        }
+    }
     stages {
         stage('Build') {
             steps {
