@@ -1,22 +1,18 @@
 pipeline {
-    agent {
-            args 'mvn -v'
-        }
-    
+    agent none 
     stages {
-        stage('Build') {
+        stage('Example Build') {
+            agent { docker 'maven:3-alpine' } 
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                echo 'Hello, Maven'
+                sh 'mvn --version'
             }
         }
-        stage('Test') { 
+        stage('Example Test') {
+            agent { docker 'openjdk:8-jre' } 
             steps {
-                sh 'mvn test' 
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml' 
-                }
+                echo 'Hello World!'
+                sh 'java -version'
             }
         }
     }
