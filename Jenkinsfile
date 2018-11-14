@@ -1,15 +1,23 @@
 pipeline {
-    agent any
+    agent none
+        
+    
     stages {
         stage('Build') {
             steps {
-                echo 'Hello World'
+                sh 'mvn -B -DskipTests clean package'
             }
         }
-    }
-    post { 
-        always { 
-            echo 'I will always say Hello again!'
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
         }
+        
     }
 }
