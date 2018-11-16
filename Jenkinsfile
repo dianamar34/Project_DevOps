@@ -1,19 +1,16 @@
 pipeline {
-    agent none
-        
-    
-    stages {
-        stage('Build') {
-            steps {
-                sh 'mvn -B -DskipTests clean package'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-            
-        }
-        
-    }
-}
+	    agent any
+	    stages {
+	        stage('Build') {
+	            steps {
+	                echo 'Hello World'
+	            }
+	        }
+	    }
+	    post { 
+	        always { 
+	            echo 'I will always say Hello again!'
+	        }
+	    }
+	}
+
